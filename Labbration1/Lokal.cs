@@ -10,5 +10,11 @@ namespace Labbration1
     {
         public string LokalNummer { get; set; }
         public int Plaster { get; set; }
+
+        public Lokal(string lokNum, int natalplats)
+        {
+            this.LokalNummer = lokNum;
+            this.Plaster = natalplats;
+        }
     }
 }
