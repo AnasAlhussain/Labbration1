@@ -12,7 +12,8 @@ namespace Labbration1
         public DateTime SlutDatum { get; set; }
         public string Moment { get; set; }
         public Kurs Kurs { get; set; }
-        public Lokal Lokal { get; set; }
+        public List<Lokal> Lokal { get; set; }
+        public Schema Schema { get; set; }
 
 
 

@@ -8,20 +8,20 @@ namespace Labbration1
 {
     public class InMemoryDatabase
     {
-        public List <Person> Personer = new List <Person> ();
-        public List<Kurs> Kurser = new List<Kurs>();
-        public List<Schema> Schemar = new List<Schema>();
-        public List<SchemaRad> SchemaRader = new List<SchemaRad>();
-        public List<Lärare> Lärarer = new List<Lärare>();
-        public List<Student> Studenter = new List<Student>();
-        public List<KursTillfälle> KursTillfäller = new List<KursTillfälle>();
-        public List<Lokal> Lokaler = new List<Lokal>();
-        public List<Utibildning> Utibildninger = new List<Utibildning>();
-
-        
+        public List <Person> Personer { get; set; }
+        public List<Kurs> Kurser { get; set; }
+        public List<Schema> Schemar { get; set; }
+        public List<SchemaRad> SchemaRader { get; set; }
+        public List<Lärare> Lärarer { get; set; }
+        public List<Student> Studenter { get; set; }
+        public List<KursTillfälle> KursTillfäller { get; set; }
+        public List<Lokal> Lokaler { get; set; }
+        public List<Utibildning> Utibildninger  { get; set; }
 
 
-        public void Spara()
+
+
+    public void Spara()
         {
 
             #region Lärare
@@ -34,7 +34,7 @@ namespace Labbration1
 
         }
         //  method that returns a list of teachers
-        public List<Lärare> HämtaLärare()
+        public static List<Lärare> HämtaLärare()
         {
             List<Lärare> Lärarer = new List<Lärare>()
             {
@@ -55,7 +55,7 @@ namespace Labbration1
         }
 
         //  method that returns a list of students
-        public  List<Student> HämtaStudenter()
+        public static List<Student> HämtaStudenter()
         {
             List<Student> Studenter = new List<Student>()
             {
@@ -73,7 +73,7 @@ namespace Labbration1
         }
 
         //  method that returns a list of courses
-        public List<Kurs> HämtaKurser()
+        public static List<Kurs> HämtaKurser()
         {
             List<Kurs> Kurser = new List<Kurs>()
             {
@@ -91,7 +91,7 @@ namespace Labbration1
         }
 
         //  method that returns a list of courses
-        public List<Utibildning> HämtaUtbildningar()
+        public static List<Utibildning> HämtaUtbildningar()
         {
             List<Utibildning> Utibildninger = new List<Utibildning>()
             {
@@ -110,7 +110,7 @@ namespace Labbration1
         }
 
         //  method that returns a list of courses
-        public List<KursTillfälle> HämtaKursTillfällen()
+        public static List<KursTillfälle> HämtaKursTillfällen()
         {
             List<KursTillfälle> KursTillfäller = new List<KursTillfälle>()
             {
@@ -132,7 +132,7 @@ namespace Labbration1
 
 
         //  method that returns a list of courses
-        public List<Schema> HämtaSchemar()
+        public static List<Schema> HämtaSchemar()
         {
             List<Schema> Schemar = new List<Schema>()
             {
@@ -152,11 +152,11 @@ namespace Labbration1
 
 
         //  method that returns a list ofSchemaRader
-        public List<SchemaRad> HämtaSchemaRader()
+        public static List<SchemaRad> HämtaSchemaRader()
         {
             List<SchemaRad> SchemaRader = new List<SchemaRad>()
             {
-                new SchemaRad(new DateTime(2021,09,01), new DateTime(2021,12,01), "09:00-12:00"),
+                new SchemaRad(new DateTime(2021,09,01),  new DateTime(2021,12,01), "09:00-12:00"),
                 new SchemaRad(new DateTime(2021,09,01), new DateTime(2021,12,01), "09:00-12:00"),
                 new SchemaRad(new DateTime(2021,09,01), new DateTime(2021,12,01), "09:00-12:00"),
                 new SchemaRad(new DateTime(2021,09,01), new DateTime(2021,12,01), "09:00-12:00"),
@@ -171,7 +171,7 @@ namespace Labbration1
         }
 
         //  method that returns a list of lokaler
-        public List<Lokal> HämtaLokaler()
+        public static List<Lokal> HämtaLokaler()
         {
             List<Lokal> Lokaler = new List<Lokal>()
             {
@@ -190,6 +190,107 @@ namespace Labbration1
         }
 
 
+        public static void StartApp()
+        {
+            List<Lärare> Teachers = InMemoryDatabase.HämtaLärare();
 
+            
+           
+                Console.BackgroundColor = ConsoleColor.Blue; //These lines control the color theme of the program.
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.Clear();
+                WelcomeMenu();
+                Console.WriteLine("\nAre you a Lärare or Admin?" +
+                    "\n\n[1] Student" +
+                    "\n[2] Lärare"); // IN the starting menu the user can choose to log in as admin or a regular customer.
+
+
+                string choice = Console.ReadLine();
+                switch (choice)
+                {
+                    case "1":
+                        Console.Clear();
+                        Console.WriteLine("Welcome Lärare");
+                        break;
+                    case "2":
+                        Lärare logginLärare = Lärare.LogIn(Teachers);
+                        AdminMenu();
+                        break;
+                }
+            
+
+        }
+
+        private static void WelcomeMenu()
+        {
+            Console.Beep();
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("\n         Welcome to School System" +
+            "\n         ----------------------------" +
+            "\n                 _ _.-'`-._ _\r\n                ;.'________'.;\r\n     _________n.[____________].n_________\r\n    |\"\"_\"\"_\"\"_\"\"||==||==||==||\"\"_\"\"_\"\"_\"\"]\r\n    |\"\"\"\"\"\"\"\"\"\"\"||..||..||..||\"\"\"\"\"\"\"\"\"\"\"|\r\n    |LI LI LI LI||LI||LI||LI||LI LI LI LI|\r\n    |.. .. .. ..||..||..||..||.. .. .. ..|\r\n    |LI LI LI LI||LI||LI||LI||LI LI LI LI|\r\n ,,;;,;;;,;;;,;;;,;;;,;;;,;;;,;;,;;;,;;;,;;,,\r\n;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;");
+            DailyMessage();
+            Console.WriteLine("\nPress Enter to Log in!");
+            Console.ReadKey();
+        }
+
+        private static void DailyMessage()
+        {
+            Random random = new Random();
+            List<string> messages = new List<string>
+            {
+                "\nThe only System you need in your life!",
+                "\nExpertise you need. Service you deserve!",
+                "\nWe Built This System For You!",
+                "\nYour First Choice!",
+                "\nWe know Adminstartion!",
+                "\nSystem for people with better things to do!",
+                "\nBecause life’s complicated enough!",
+                "\nMake Dreams Happen!",
+                "\nYour First Choice!",
+                "\nSystem Focused on You!"
+            };
+            string randomMessage = messages[random.Next(messages.Count)];
+            Console.WriteLine(randomMessage);
+        }
+
+        public static void AdminMenu()
+        {
+            Console.WriteLine("Welcome to school system");
+            Console.WriteLine("1. Get teacher");
+            Console.WriteLine("2. Get student");
+            Console.WriteLine("3. Get course");
+            Console.WriteLine("4. Get education");
+            Console.WriteLine("5. Get room");
+            Console.WriteLine("6. Get schedule");
+
+            //Switch case to choose the option
+            switch (Console.ReadLine())
+            {
+                case "1":
+                    HämtaLärare();
+
+                    break;
+                case "2":
+                    HämtaStudenter();
+                    break;
+                case "3":
+                    HämtaKurser();
+                    break;
+                case "4":
+                    HämtaKursTillfällen();
+                    break;
+                case "5":
+                    HämtaLokaler();
+                    break;
+                case "6":
+                    HämtaSchemar();
+                    break;
+                default:
+                    Console.WriteLine("Invalid option");
+                    break;
+            }
+        }
     }
 }

@@ -14,6 +14,11 @@ namespace Labbration1
         public string Akronym { get; set; }
         public double HögskolaPoäng { get; set; }
 
+        public Schema Schema { get; set; }
+
+        public List<KursTillfälle> KursTillfälles { get; set; }
+        public Utibildning Utibildning { get; set; }
+
 
         public Kurs(string kursnamn,string kurskod,string exam,string akronym,double poäng)
         {
